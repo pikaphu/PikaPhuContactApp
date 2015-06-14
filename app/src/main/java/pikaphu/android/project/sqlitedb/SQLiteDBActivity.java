@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb;
+package pikaphu.android.project.sqlitedb;
 
 
 import java.util.List;
@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.pikaphu.sqlitedb.contactapp.Contact;
-import com.android.pikaphu.sqlitedb.contactapp.ContactDBHelper;
-import com.android.pikaphu.sqlitedb.contactapp.ContactDataSource;
+import pikaphu.android.project.sqlitedb.contactapp.Contact;
+import pikaphu.android.project.sqlitedb.contactapp.ContactDataSource;
 
 public class SQLiteDBActivity extends ListActivity {
     final static String TAG = "SQLite";
@@ -30,6 +30,9 @@ public class SQLiteDBActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main); //setContentView(R.layout.main);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         Button add_contact = (Button) findViewById(R.id.btn_Add);
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +56,13 @@ public class SQLiteDBActivity extends ListActivity {
 
     // List all contact from db
     private void showAllContact() {
+        // setListAdapter(null);
+        // clear then get data
         values = datasource.getAllContact();
         ArrayAdapter<Contact> adapter = new ArrayAdapter<Contact>(this,
                 android.R.layout.simple_list_item_1, values);
+
+        //android.R.id.list
         setListAdapter(adapter);
     }
 

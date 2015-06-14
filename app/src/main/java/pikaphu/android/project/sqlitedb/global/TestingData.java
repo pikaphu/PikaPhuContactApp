@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb.global;
+package pikaphu.android.project.sqlitedb.global;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.pikaphu.sqlitedb.R;
+import pikaphu.android.project.sqlitedb.R;
 
 
 public class TestingData extends Activity {

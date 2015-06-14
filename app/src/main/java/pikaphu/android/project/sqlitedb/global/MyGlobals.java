@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb.global;
+package pikaphu.android.project.sqlitedb.global;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb.contactapp;
+package pikaphu.android.project.sqlitedb.contactapp;
 
 /**
  * Created by Pikaphu on 7/6/2558.
@@ -68,7 +68,7 @@ public class Contact {
     // override for ArrayAdapter in ListView
     @Override
     public String toString() {
-        return title;
+        return firstname + " (" + title + ") ";
     }
 
 }

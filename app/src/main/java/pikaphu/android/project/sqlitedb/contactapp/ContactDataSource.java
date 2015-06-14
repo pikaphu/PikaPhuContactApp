@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb.contactapp;
+package pikaphu.android.project.sqlitedb.contactapp;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,9 +22,9 @@ public class ContactDataSource {
             ContactDBHelper.COLUMN_ID,
             ContactDBHelper.COLUMN_FIRSTNAME,
             ContactDBHelper.COLUMN_SURNAME,
+            ContactDBHelper.COLUMN_TITLE,
             ContactDBHelper.COLUMN_BIRTHDATE,
             ContactDBHelper.COLUMN_ADDRESS,
-            ContactDBHelper.COLUMN_TITLE,
             ContactDBHelper.COLUMN_PHONE
     };
 
@@ -48,17 +48,17 @@ public class ContactDataSource {
         //values.put(ContactDBHelper.COLUMN_ID, contact.getId());
         values.put(ContactDBHelper.COLUMN_FIRSTNAME, contact.getFirstname());
         values.put(ContactDBHelper.COLUMN_SURNAME, contact.getSurname());
+        values.put(ContactDBHelper.COLUMN_TITLE, contact.getTitle());
         values.put(ContactDBHelper.COLUMN_BIRTHDATE, contact.getBirthdate());
         values.put(ContactDBHelper.COLUMN_ADDRESS, contact.getAddress());
-        values.put(ContactDBHelper.COLUMN_TITLE, contact.getTitle());
         values.put(ContactDBHelper.COLUMN_PHONE, contact.getPhone());
 
         long insertId = database.insert(ContactDBHelper.TABLE_CONTACTS, null, values);
 
         Cursor cursor = database.query(ContactDBHelper.TABLE_CONTACTS,
-                allColumns,
-                ContactDBHelper.COLUMN_ID + " = " + insertId,
-                null, null, null, null
+                                        allColumns,
+                                        ContactDBHelper.COLUMN_ID + " = " + insertId,
+                                        null, null, null, null
         );
         cursor.moveToFirst();
         return cursorToContact(cursor);
@@ -78,15 +78,15 @@ public class ContactDataSource {
         //values.put(ContactDBHelper.COLUMN_ID, contact.getId());
         values.put(ContactDBHelper.COLUMN_FIRSTNAME, contact.getFirstname());
         values.put(ContactDBHelper.COLUMN_SURNAME, contact.getSurname());
+        values.put(ContactDBHelper.COLUMN_TITLE, contact.getTitle());
         values.put(ContactDBHelper.COLUMN_BIRTHDATE, contact.getBirthdate());
         values.put(ContactDBHelper.COLUMN_ADDRESS, contact.getAddress());
-        values.put(ContactDBHelper.COLUMN_TITLE, contact.getTitle());
         values.put(ContactDBHelper.COLUMN_PHONE, contact.getPhone());
 
         database.update(ContactDBHelper.TABLE_CONTACTS,
-                values,
-                ContactDBHelper.COLUMN_ID + "=" + contact.getId(),
-                null
+                        values,
+                        ContactDBHelper.COLUMN_ID + "=" + contact.getId(),
+                        null
         );
     }
     //endregion
@@ -96,7 +96,7 @@ public class ContactDataSource {
         List<Contact> contactlist = new ArrayList<Contact>();
         Cursor cursor = database.query( ContactDBHelper.TABLE_CONTACTS,
                                         allColumns,
-                                        null,null,null,null,null, null
+                                        null,null,null,null,null
                                         );
         cursor.moveToFirst();
         while( !cursor.isAfterLast() ) {

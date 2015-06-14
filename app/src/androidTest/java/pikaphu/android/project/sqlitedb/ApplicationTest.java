@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb;
+package pikaphu.android.project.sqlitedb;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

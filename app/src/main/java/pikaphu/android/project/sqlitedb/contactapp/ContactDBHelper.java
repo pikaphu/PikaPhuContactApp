@@ -1,4 +1,4 @@
-package com.android.pikaphu.sqlitedb.contactapp;
+package pikaphu.android.project.sqlitedb.contactapp;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
