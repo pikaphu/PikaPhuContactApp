@@ -1,5 +1,6 @@
 > PikaPhuContactApp
-# V1.1 
+# V1.2
+- upload to google play
 - bug fiexed
 
 - missing add logo
