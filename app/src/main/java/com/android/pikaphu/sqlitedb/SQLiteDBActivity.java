@@ -48,6 +48,7 @@ public class SQLiteDBActivity extends ListActivity {
         {
             e.printStackTrace();
         }
+
     }
 
     // List all contact from db
@@ -258,7 +259,6 @@ public class SQLiteDBActivity extends ListActivity {
         dialog.show();
     }
 
-
     @Override
     protected void onResume() {
         try {
@@ -271,7 +271,7 @@ public class SQLiteDBActivity extends ListActivity {
 
     @Override
     protected void onPause() {
-        datasource.close();
+        //datasource.close();
         super.onPause();
     }
 

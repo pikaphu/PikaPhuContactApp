@@ -29,12 +29,12 @@ public class ContactDBHelper extends SQLiteOpenHelper {
     private  static final String DATABASE_CREATE = "create table " + TABLE_CONTACTS +
             "(" +
             COLUMN_ID + " integer primary key autoincrement, " +
-            COLUMN_FIRSTNAME + "text," +
-            COLUMN_SURNAME + "text," +
-            COLUMN_TITLE + "text," +
-            COLUMN_BIRTHDATE + "text," +
-            COLUMN_ADDRESS + "text," +
-            COLUMN_PHONE + "text" +
+            COLUMN_FIRSTNAME + " text," +
+            COLUMN_SURNAME + " text," +
+            COLUMN_TITLE + " text," +
+            COLUMN_BIRTHDATE + " text," +
+            COLUMN_ADDRESS + " text," +
+            COLUMN_PHONE + " text" +
             ");";
 
     // ctor

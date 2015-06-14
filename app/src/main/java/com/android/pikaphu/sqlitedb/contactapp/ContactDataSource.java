@@ -96,7 +96,7 @@ public class ContactDataSource {
         List<Contact> contactlist = new ArrayList<Contact>();
         Cursor cursor = database.query( ContactDBHelper.TABLE_CONTACTS,
                                         allColumns,
-                                        null,null,null,null,null
+                                        null,null,null,null,null, null
                                         );
         cursor.moveToFirst();
         while( !cursor.isAfterLast() ) {
