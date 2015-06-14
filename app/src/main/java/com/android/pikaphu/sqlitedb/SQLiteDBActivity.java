@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.pikaphu.sqlitedb.contactapp.Contact;
+import com.android.pikaphu.sqlitedb.contactapp.ContactDBHelper;
 import com.android.pikaphu.sqlitedb.contactapp.ContactDataSource;
 
 public class SQLiteDBActivity extends ListActivity {
@@ -37,9 +38,9 @@ public class SQLiteDBActivity extends ListActivity {
             }
         });
 
-        datasource = new ContactDataSource(this);
         try
         {
+            datasource = new ContactDataSource(this);
             datasource.open();
             showAllContact();
         }
@@ -117,7 +118,7 @@ public class SQLiteDBActivity extends ListActivity {
             }
         });
 
-        //close
+        //close dialog
         Button btn_cancel = (Button) dialog.findViewById(R.id.btn_Close);
         btn_cancel.setOnClickListener(new OnClickListener() {
             @Override
@@ -159,21 +160,102 @@ public class SQLiteDBActivity extends ListActivity {
         btnSave.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get string from controls input
+                String valueFirstname = edtxtFirstname.getText().toString();
+                String valueSurname = edtxtSurname.getText().toString();
+                String valueTitle = edtxtTitle.getText().toString();
+                String valueBirthdate = edtxtBirthdate.getText().toString();
+                String valueAddress = edtxtAddress.getText().toString();
+                String valuePhone = edtxtPhone.getText().toString();
 
+                // set string to object plain
+                contact.setFirstname(valueFirstname);
+                contact.setSurname(valueSurname);
+                contact.setTitle(valueTitle);
+                contact.setBirthdate(valueBirthdate);
+                contact.setAddress(valueAddress);
+                contact.setPhone(valuePhone);
+
+                // then Update "real" datasource
+                datasource.updateContact(contact);
+
+                // switch to show data layout
+                showAllContact();
+
+                // popup cancel dialog while loading data
+                dialog.cancel();
+            }
+        });
+        // add handle to cancel dialog
+        Button btnCancel = (Button) dialog.findViewById(R.id.btn_Cancel);
+        btnCancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
             }
         });
 
+        // show dialog on screen
+        dialog.show();
 
         //region "custom edit"
         String apptitle = getResources().getString(R.string.title_activity_sqlite_db);
         String sayhi = getString(R.string.hello_world);
         //endregion
-
     }
 
     // Insert new data
     private void addContact() {
+        // set layout dialog for add data
+        final Dialog dialog = new Dialog(SQLiteDBActivity.this);
+        dialog.setContentView(R.layout.add_contact);
+        dialog.setTitle("Add New Contact");
+        dialog.setCancelable(true);
 
+        // setup button
+        Button btnSave = (Button) dialog.findViewById(R.id.btn_Save);
+        btnSave.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // find and define controls
+                final EditText edtxtFirstname = (EditText) dialog.findViewById(R.id.edtxt_Firstname);
+                final EditText edtxtSurname = (EditText) dialog.findViewById(R.id.edtxt_Surname);
+                final EditText edtxtTitle = (EditText) dialog.findViewById(R.id.edtxt_Title);
+                final EditText edtxtBirthdate = (EditText) dialog.findViewById(R.id.edtxt_Birthdate);
+                final EditText edtxtAddress = (EditText) dialog.findViewById(R.id.edtxt_Address);
+                final EditText edtxtPhone = (EditText) dialog.findViewById(R.id.edtxt_Phone);
+
+                // get string from controls input
+                String valueFirstname = edtxtFirstname.getText().toString();
+                String valueSurname = edtxtSurname.getText().toString();
+                String valueTitle = edtxtTitle.getText().toString();
+                String valueBirthdate = edtxtBirthdate.getText().toString();
+                String valueAddress = edtxtAddress.getText().toString();
+                String valuePhone = edtxtPhone.getText().toString();
+
+                @SuppressWarnings("unchecked")
+                ArrayAdapter<Contact> adapter = (ArrayAdapter<Contact>) getListAdapter();
+                Contact contact = new Contact();
+                // set string to object
+                contact.setFirstname(valueFirstname);
+                contact.setSurname(valueSurname);
+                contact.setTitle(valueTitle);
+                contact.setBirthdate(valueBirthdate);
+                contact.setAddress(valueAddress);
+                contact.setPhone(valuePhone);
+                contact = datasource.insertContact(contact); // update data then return
+                adapter.add(contact);
+                dialog.cancel();
+            }
+        });
+        Button btnCancel = (Button) dialog.findViewById(R.id.btn_Cancel);
+        btnCancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
     }
 
 

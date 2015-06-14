@@ -17,3 +17,13 @@ allprojects {
         jcenter()
     }
 }
+
+/*
+android {
+    buildTypes {
+        debug {
+            debuggable true
+        }
+    }
+}
+*/
