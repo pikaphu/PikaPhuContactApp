@@ -1,6 +1,6 @@
 > PikaPhuContactApp
-# V0.9 
-Testing Native Android App
+# V1.1 
+- bug fiexed
 
 - missing add logo
 - missing credit
